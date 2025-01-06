@@ -1,0 +1,55 @@
+# Meow-Delete Bot
+
+Bot Discord para limpeza automática de mensagens aos domingos.
+Em breve terão novas Funcionalidades tornando o bot mais mais flexivel.
+
+## 🚀 Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/meow-delete.git
+
+# Entre na pasta
+cd meow-delete
+
+# Instale as dependências
+npm install
+```
+
+## ⚙️ Configuração
+
+1. Crie um arquivo `.env` na raiz do projeto:
+
+```env
+DISCORD_TOKEN=seu_token_aqui
+CHANNEL_ID=id_do_canal_aqui
+```
+
+2. O arquivo `schedule.json` será criado automaticamente na primeira execução.
+
+
+3. O arquivo `embedBuilder.js` Tem instrunções de como criar um embed personalizado.
+
+## 💻 Como usar
+
+```bash
+# Iniciar o bot
+use o comando node index.js
+instale as dependências usando npm install ou npm i
+```
+
+## 📋 Funcionalidades
+
+- Limpeza automática de mensagens aos domingos
+- Preserva mensagens específicas configuradas
+- Embed informativo com status e próxima execução
+- Sincronização automática com fuso horário de São Paulo Por meio de uma api externa
+
+## 🛠️ Tecnologias
+
+- Node.js
+- Discord.js v14
+- dotenv
+- node-schedule
+
+MIT License
