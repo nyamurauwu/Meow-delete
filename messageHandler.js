@@ -16,10 +16,15 @@ class MessageHandler {
         let deletedCount = 0;
 
         try {
+            // Define um limite de tempo (7 dias atrás)
+            const cutoffDate = new Date();
+            cutoffDate.setDate(cutoffDate.getDate() - 7);
+
             while (true) {
                 const messages = await this.channel.messages.fetch({ limit: 100 });
                 const messagesToDelete = messages.filter(msg => 
-                    ![this.config.embedMessageId, ...this.config.additionalExemptIds].includes(msg.id)
+                    ![this.config.embedMessageId, ...this.config.additionalExemptIds].includes(msg.id) &&
+                    msg.createdTimestamp > cutoffDate.getTime()
                 );
 
                 if (messagesToDelete.size === 0) break;
@@ -37,7 +42,6 @@ class MessageHandler {
         } finally {
             this.isDeleting = false;
         }
-    }
-}
+    }}
 
 module.exports = MessageHandler;
