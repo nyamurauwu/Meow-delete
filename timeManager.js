@@ -4,6 +4,8 @@ const path = require('path');
 
 const CONFIG_PATH = path.join(__dirname, 'config', 'schedule.json');
 
+
+
 class TimeManager {
     static async getSPTimeData() {
         while (true) {
@@ -33,12 +35,22 @@ class TimeManager {
                 };
             } catch (error) {
                 console.log(`🔴 Erro ao acessar WorldTimeAPI: ${error.message}`);
+                console.log('⚠️ Usando horário local como fallback temporário');
+                
+                // Retorna fallback mas continua tentando reconectar
+                const localConfig = {
+                    timezone: 'America/Sao_Paulo',
+                    utc_offset: '-03:00',
+                    currentTime: new Date()
+                };
+
                 console.log('🔄 Nova tentativa em 30 segundos...');
                 await new Promise(resolve => setTimeout(resolve, 30000));
+                
+                return localConfig;
             }
         }
     }
-
     static async getNextSunday() {
         const spData = await this.getSPTimeData();
         const now = new Date(spData.currentTime);
